@@ -1,8 +1,7 @@
 .cover {
   max-width: 880px;
-  margin: 0;
+  margin: 40px auto 0;
   padding: 0;
-  padding-top: 40px;
   font-family: Inter;
   -webkit-font-smoothing: antialiased;
   -moz-osx-smoothing: grayscale;
@@ -13,12 +12,9 @@
 }
 
 .cover__container {
-  margin-left: 200px;
-  margin-right: 200px;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  max-width: 880px;
   width: 100%;
 }
 
