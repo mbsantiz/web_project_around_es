@@ -30,12 +30,11 @@
 }
 
 .elements__image {
-  max-height: 282px;
   width: 100%;
+  height: 282px;
   object-fit: cover;
   display: block;
-  margin: 0;
-  padding: 0;
+  border-radius: 10px 10px 0 0;
 }
 
 .elements__foot {
@@ -79,4 +78,28 @@
 }
 .elements__button-image {
   max-width: 21px;
+}
+
+.elements__image-container {
+  position: relative;
+}
+
+.elements__delete-button {
+  position: absolute;
+  top: 18px;
+  right: 15px;
+
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+
+  width: 18px;
+  height: 19.3px;
+}
+
+.elements__delete-button img {
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }

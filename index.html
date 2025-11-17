@@ -27,6 +27,7 @@
           />
         </div>
       </header>
+
       <section class="cover">
         <div class="cover__container">
           <img
@@ -36,7 +37,9 @@
           />
           <div class="cover__text">
             <div class="cover__info">
-              <h2 class="cover__name">Jacques Cousteau</h2>
+              <h2 class="cover__name cover__container__info-name">
+                Jacques Cousteau
+              </h2>
               <button type="button" class="cover__button" id="openPopup">
                 <img
                   src="./images/pencil.png"
@@ -45,8 +48,9 @@
                 />
               </button>
             </div>
-            <p class="cover__role">Explorador</p>
+            <p class="cover__role cover__container__info-role">Explorador</p>
           </div>
+
           <div class="cover__plusbutton">
             <img
               src="./images/+.png"
@@ -56,119 +60,15 @@
           </div>
         </div>
       </section>
+
       <main class="content">
-        <section class="elements">
-          <figure class="elements__item">
-            <img
-              src="./images/Item 1.jpg"
-              alt="Item 1"
-              class="elements__image"
-            />
-            <div class="elements__foot">
-              <p class="elements__foot-text">Valle de Yosemite</p>
-              <button id="heartButton" class="elements__foot-button">
-                <img
-                  src="./images/heart.svg"
-                  alt="Me gusta"
-                  class="elements__button-image"
-                />
-              </button>
-            </div>
-          </figure>
-
-          <figure class="elements__item">
-            <img
-              src="./images/Item 2.png"
-              alt="Item 2"
-              class="elements__image"
-            />
-            <div class="elements__foot">
-              <p class="elements__foot-text">Lago Louise</p>
-              <button id="heartButton" class="elements__foot-button">
-                <img
-                  src="./images/heart.svg"
-                  alt="Me gusta"
-                  class="elements__button-image"
-                />
-              </button>
-            </div>
-          </figure>
-          <figure class="elements__item">
-            <img
-              src="./images/Item 3.png"
-              alt="Item 3"
-              class="elements__image"
-            />
-            <div class="elements__foot">
-              <p class="elements__foot-text">Montañas Calvas</p>
-              <button id="heartButton" class="elements__foot-button">
-                <img
-                  src="./images/heart.svg"
-                  alt="Me gusta"
-                  class="elements__button-image"
-                />
-              </button>
-            </div>
-          </figure>
-
-          <figure class="elements__item">
-            <img
-              src="./images/Item 4.png"
-              alt="Item 4"
-              class="elements__image"
-            />
-            <div class="elements__foot">
-              <p class="elements__foot-text">Latemar</p>
-              <button id="heartButton" class="elements__foot-button">
-                <img
-                  src="./images/heart.svg"
-                  alt="Me gusta"
-                  class="elements__button-image"
-                />
-              </button>
-            </div>
-          </figure>
-
-          <figure class="elements__item">
-            <img
-              src="./images/Item 5.png"
-              alt="Item 5"
-              class="elements__image"
-            />
-            <div class="elements__foot">
-              <p class="elements__foot-text">Vanois National Park</p>
-              <button id="heartButton" class="elements__foot-button">
-                <img
-                  src="./images/heart.svg"
-                  alt="Me gusta"
-                  class="elements__button-image"
-                />
-              </button>
-            </div>
-          </figure>
-
-          <figure class="elements__item">
-            <img
-              src="./images/Item 6.png"
-              alt="Item 6"
-              class="elements__image"
-            />
-            <div class="elements__foot">
-              <p class="elements__foot-text">Lago di Braies</p>
-              <button id="heartButton" class="elements__foot-button">
-                <img
-                  src="./images/heart.svg"
-                  alt="Me gusta"
-                  class="elements__button-image"
-                />
-              </button>
-            </div>
-          </figure>
-        </section>
+        <section class="elements"></section>
       </main>
+
       <footer class="footer">
         <p class="footer__copyright">© 2024 Around The U.S.</p>
       </footer>
+
       <div id="popup" class="popup">
         <div class="popup__container">
           <img
@@ -178,28 +78,87 @@
             id="closePopup"
           />
           <h2 class="popup__title">Editar perfil</h2>
+
           <form class="popup__form" id="editForm">
             <input
               type="text"
-              class="popup__input"
+              class="popup__input popup__form__text"
               placeholder="Nombre"
               name="name"
             />
             <img src="./images/Line 2.png" alt="linea" class="popup__line" />
+
             <input
               type="text"
-              class="popup__input"
+              class="popup__input popup__form__text"
               placeholder="Acerca de mí"
               name="about"
             />
             <img src="./images/Line 2.png" alt="linea" class="popup__line" />
+
             <button id="saveButton" type="submit" class="popup__savebutton">
               Guardar
             </button>
           </form>
         </div>
       </div>
+
+      <div id="popupPlace" class="popup">
+        <div class="popup__container">
+          <img
+            src="./images/Close Icon (3).png"
+            alt="Cerrar"
+            class="popup__close"
+            id="closePopupPlace"
+          />
+          <h2 class="popup__title">New Place</h2>
+
+          <form class="popup__form" id="newPlaceForm">
+            <input
+              type="text"
+              class="popup__input popup__input-place popup__input-text popup__form__text"
+              placeholder="Title"
+              id="placeTitle"
+              name="title"
+              required
+            />
+            <img src="./images/Line 2.png" alt="linea" class="popup__line" />
+
+            <input
+              type="url"
+              class="popup__input popup__input-place popup__input-text popup__form__text"
+              placeholder="Image URL"
+              id="placeImage"
+              name="image"
+              required
+            />
+            <img src="./images/Line 2.png" alt="linea" class="popup__line" />
+
+            <button
+              id="savePlaceButton"
+              type="submit"
+              class="popup__savebutton"
+            >
+              Guardar
+            </button>
+          </form>
+        </div>
+      </div>
+      <div id="popupImage" class="popup popup-image">
+        <div class="popup-image__container">
+          <img
+            src="./images/Close Icon (3).png"
+            alt="Cerrar"
+            class="popup__close popup-image__close"
+            id="closePopupImage"
+          />
+
+          <img class="popup-image__photo" src="" alt="" />
+          <p class="popup-image__caption"></p>
+        </div>
+      </div>
     </div>
+
     <script src="./scripts/index.js"></script>
   </body>
 </html>
