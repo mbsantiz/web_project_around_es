@@ -7,7 +7,7 @@
   -moz-osx-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
-  text-rendering: optimizeLegibility;
+  text-rendering: optimizelegibility;
   background-color: #0000;
 }
 
@@ -58,6 +58,7 @@
 .cover__button-image {
   padding: 6px;
   max-width: 10px;
+  cursor: pointer;
 }
 
 .cover__name {
@@ -76,7 +77,6 @@
   font-family: Inter;
   font-weight: 400;
   font-size: 18px;
-  leading-trim: NONE;
   line-height: 100%;
   letter-spacing: 0%;
 }

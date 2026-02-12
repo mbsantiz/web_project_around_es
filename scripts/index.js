@@ -1,5 +1,42 @@
+import { enableValidation, resetValidation } from "./validate.js";
+
+const validationConfig = {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__savebutton",
+  inactiveButtonClass: "popup__button_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__error_visible",
+};
+
+enableValidation(validationConfig);
+
 document.addEventListener("DOMContentLoaded", () => {
   const elementsSection = document.querySelector(".elements");
+
+  function openPopup(popup) {
+    popup.classList.add("popup_opened");
+  }
+
+  function closePopup(popup) {
+    popup.classList.remove("popup_opened");
+  }
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      const openedPopup = document.querySelector(".popup_opened");
+      if (openedPopup) closePopup(openedPopup);
+    }
+  });
+
+  const allPopups = document.querySelectorAll(".popup");
+  allPopups.forEach((popup) => {
+    popup.addEventListener("mousedown", (e) => {
+      if (e.target === popup) {
+        closePopup(popup);
+      }
+    });
+  });
 
   const initialCards = [
     {
@@ -47,8 +84,8 @@ document.addEventListener("DOMContentLoaded", () => {
       </button>
     </div>
   `;
-    const image = card.querySelector(".elements__image");
 
+    const image = card.querySelector(".elements__image");
     image.addEventListener("click", () => {
       openImagePopup(cardData.link, cardData.name);
     });
@@ -79,7 +116,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const openProfileBtn = document.getElementById("openPopup");
   const closeProfileBtn = document.getElementById("closePopup");
   const saveProfileBtn = document.getElementById("saveButton");
-  const profileInputs = document.querySelectorAll(".popup__form__text");
+  const profileInputs = popupProfile.querySelectorAll(".popup__input");
   const formProfile = document.querySelector("#editForm");
 
   function toggleSaveButton(btn, inputs) {
@@ -87,17 +124,16 @@ document.addEventListener("DOMContentLoaded", () => {
     btn.classList.toggle("active", hasText);
   }
 
-  openProfileBtn?.addEventListener("click", () =>
-    popupProfile.classList.add("popup_opened")
-  );
-  closeProfileBtn?.addEventListener("click", () =>
-    popupProfile.classList.remove("popup_opened")
-  );
+  openProfileBtn?.addEventListener("click", () => {
+    resetValidation(formProfile, validationConfig);
+    openPopup(popupProfile);
+  });
+  closeProfileBtn?.addEventListener("click", () => closePopup(popupProfile));
 
   profileInputs.forEach((input) =>
     input.addEventListener("input", () =>
-      toggleSaveButton(saveProfileBtn, profileInputs)
-    )
+      toggleSaveButton(saveProfileBtn, profileInputs),
+    ),
   );
 
   function handleProfileFormSubmit(e) {
@@ -111,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.querySelector(".cover__container__info-role").textContent =
       jobInput.value;
 
-    popupProfile.classList.remove("popup_opened");
+    closePopup(popupProfile);
   }
 
   formProfile.addEventListener("submit", handleProfileFormSubmit);
@@ -123,26 +159,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const placeInputs = popupPlace.querySelectorAll(".popup__input");
   const placeForm = popupPlace.querySelector("form");
 
-  openPlaceBtn.addEventListener("click", () =>
-    popupPlace.classList.add("popup_opened")
-  );
-  closePlaceBtn.addEventListener("click", () =>
-    popupPlace.classList.remove("popup_opened")
-  );
+  openPlaceBtn.addEventListener("click", () => {
+    openPopup(popupPlace);
+    placeForm.reset();
+    resetValidation(placeForm, validationConfig);
+  });
+
+  closePlaceBtn.addEventListener("click", () => closePopup(popupPlace));
 
   placeInputs.forEach((input) =>
     input.addEventListener("input", () =>
-      toggleSaveButton(savePlaceButton, placeInputs)
-    )
+      toggleSaveButton(savePlaceButton, placeInputs),
+    ),
   );
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") popupPlace.classList.remove("popup_opened");
-  });
-
-  popupPlace.addEventListener("click", (e) => {
-    if (e.target === popupPlace) popupPlace.classList.remove("popup_opened");
-  });
 
   placeForm.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -153,9 +182,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const newCard = createCard({ name, link });
 
     elementsSection.prepend(newCard);
-    popupPlace.classList.remove("popup_opened");
     placeForm.reset();
     savePlaceButton.classList.remove("active");
+    closePopup(popupPlace);
   });
 
   const popupImage = document.getElementById("popupImage");
@@ -166,18 +195,8 @@ document.addEventListener("DOMContentLoaded", () => {
   function openImagePopup(src, caption) {
     popupImagePhoto.src = src;
     popupImageCaption.textContent = caption;
-    popupImage.classList.add("popup_opened");
+    openPopup(popupImage);
   }
 
-  closePopupImageBtn.addEventListener("click", () => {
-    popupImage.classList.remove("popup_opened");
-  });
-
-  popupImage.addEventListener("click", (e) => {
-    if (e.target === popupImage) popupImage.classList.remove("popup_opened");
-  });
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") popupImage.classList.remove("popup_opened");
-  });
+  closePopupImageBtn.addEventListener("click", () => closePopup(popupImage));
 });
