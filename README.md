@@ -1,128 +1,247 @@
 Tripleten web_project_around
+
 Around the U.S
 
 Autor: Marcos Santiz
-Enlace: https://mbsantiz.github.io/web_project_around/
+Enlace: [https://mbsantiz.github.io/web_project_around/](https://mbsantiz.github.io/web_project_around/)
 
-Proyecto 8 del BootCamp Software Developer
+Proyecto 9 del BootCamp Software Developer
+
+---
 
 📝 Descripción del Proyecto
 
-Este proyecto es una aplicación web estática que presenta una página con tarjetas de destinos, un perfil editable y elementos interactivos como botones de "Me gusta" y eliminación de tarjetas.
+Este proyecto es una aplicación web interactiva que simula una red de tarjetas de destinos turísticos con edición de perfil, validación de formularios y múltiples ventanas emergentes (popups).
 
-Los usuarios pueden:
+La aplicación permite al usuario interactuar con tarjetas, editar su perfil y agregar nuevos lugares utilizando formularios con validación en tiempo real.
 
-Editar su información personal.
-
-Indicar que les gusta un destino.
-
-Eliminar tarjetas.
-
-Expandir imágenes en un popup.
+---
 
 ✨ Características principales
+
 👤 Edición de perfil
 
-Los usuarios pueden modificar su nombre y su descripción mediante un popup.
+Los usuarios pueden modificar su nombre y descripción mediante un popup editable.
 
-❤️ Botones de “Me gusta”
+Funciones:
 
-Cada tarjeta cuenta con un botón interactivo que alterna entre los estados "like" y "unlike".
+- Apertura y cierre de popup
+- Validación de campos en tiempo real
+- Actualización inmediata del perfil en pantalla
+- Botón guardar activo solo cuando el formulario es válido
 
-🗑️ Botón de eliminar tarjetas
+---
 
-Se agregó un botón de basurero en la parte superior derecha de cada tarjeta.
+➕ Agregar nuevos lugares
+
+Se implementó un formulario para agregar nuevas tarjetas.
+
 Características:
 
-Ícono ubicado 18 px desde la parte superior y 15 px desde la derecha.
+- Crear nuevas cards dinámicamente
+- Mostrar imagen y título
+- Reset automático del formulario al abrir
+- Validación activa antes de permitir guardar
 
-Posicionado correctamente gracias a position: relative en el contenedor.
+---
 
-El botón elimina la tarjeta del DOM.
+❤️ Botón de “Me gusta”
 
-🖼️ Vista ampliada de la imagen
+Cada tarjeta incluye un botón de like interactivo.
 
-Al hacer clic en una imagen, se abre un popup mostrando la imagen ampliada. Se corrigió el cierre del modal, que antes no respondía.
+Funciones:
 
-💅 Estilos visuales modernos
+- Alterna entre like y unlike
+- Cambia visualmente el ícono del corazón
+- Funciona de forma independiente por tarjeta
 
-Se utilizaron imágenes de alta calidad, estilos responsivos y una organización clara de bloques BEM.
+---
+
+🗑️ Eliminación de tarjetas
+
+Cada card incluye botón de eliminar.
+
+Características:
+
+- Ubicado en la esquina superior derecha
+- Posicionado con `position: absolute`
+- Elimina la tarjeta directamente del DOM
+
+---
+
+🖼️ Vista ampliada de imágenes
+
+Al hacer clic en cualquier imagen:
+
+- Se abre popup con imagen ampliada
+- Se muestra título como descripción
+- Popup se puede cerrar de múltiples formas
+
+---
+
+🧠 Validación de formularios
+
+Se implementó sistema de validación modular en `validate.js`.
+
+Incluye:
+
+- Validación en tiempo real
+- Mensajes de error dinámicos
+- Desactivación automática del botón guardar
+- Estilos visuales de error
+- Botón inactivo si el formulario es inválido
+
+---
+
+🔄 Reset de validación al abrir popup
+
+Cada vez que se abre un popup:
+
+- Se limpian errores anteriores
+- Se reinicia estado del botón guardar
+- Inputs vuelven a estado inicial
+
+Esto mejora la experiencia del usuario y evita errores persistentes.
+
+---
+
+❌ Cierre inteligente de popups
+
+Todos los popups se pueden cerrar con:
+
+- Botón "X"
+- Click fuera del formulario (overlay)
+- Tecla **ESC**
+
+Funciona para:
+
+- Edit profile
+- New place
+- Image preview
+
+---
+
+🎨 Mejoras visuales UI/UX
+
+Se agregaron mejoras de diseño:
+
+- Inputs con padding superior e inferior
+- Línea decorativa debajo de inputs
+- Color azul al hacer focus en inputs
+- Mensajes de error sin mover el botón guardar
+- Mejor alineación visual de formularios
+
+---
 
 🧩 Cambios técnicos clave implementados
-✔️ Corrección del popup que no cerraba
 
-Se ajustó la lógica del evento click verificando:
+✔️ Sistema modular de validación
 
-Click en botón close
+Archivo:
 
-Click en overlay
+```
+validate.js
+```
 
-Prevención de burbujeo desde el contenido interno
+Funciones:
 
-✔️ Implementación del botón de eliminar
+- enableValidation()
+- resetValidation()
+- showInputError()
+- hideInputError()
+- toggleButtonState()
 
-Se agregó:
+Permite reutilizar validación en cualquier formulario.
 
-Contenedor .elements\_\_delete-button
+---
 
-Imagen del ícono dentro del botón
+✔️ Manejo global de popups
 
-Posicionamiento absoluto sobre la imagen
+Funciones reutilizables:
 
-Evento JS para eliminar el elemento padre
+```
+openPopup()
+closePopup()
+```
+
+Eventos globales:
+
+- Escape para cerrar popup activo
+- Click overlay para cerrar
+- Reset de validación al abrir
+
+---
+
+✔️ Creación dinámica de tarjetas
+
+Las tarjetas se generan con JavaScript.
+
+Funciones:
+
+- createCard()
+- Inserción dinámica en el DOM
+- Listeners independientes por tarjeta
+
+---
 
 ✔️ Justificación de position: relative
 
-El contenedor .elements\_\_image-container utiliza position: relative para permitir que:
+El contenedor:
 
-El botón de eliminar (position: absolute)
+```
+.elements__image-container
+```
 
-El ícono de corazón
+usa:
 
-Se posicionen dentro del contenedor sin salirse del card.
+```
+position: relative
+```
 
-✔️ Optimización de la clase
-.elements\_\_delete-button img {
-width: 100%;
-height: 100%;
-pointer-events: none;
-}
+Permite posicionar:
 
-Explicación:
+- Botón eliminar (absolute)
+- Botón like
+- Elementos overlay dentro de la card
 
-El ícono escala exactamente al tamaño del botón.
-
-pointer-events: none asegura que el click llegue al botón y no a la imagen.
+---
 
 📁 Estructura del Proyecto
+
+```
 /around-the-us/
-├── /images/ # Imágenes, íconos y recursos gráficos
-│ ├── close.svg
-│ ├── heart.svg
-│ ├── hearthfilled.png
-│ └── delete-icon.png
+├── /images/              # Imágenes e íconos
 ├── /pages/
-│ └── index.css # Estilos principales
-├── /script/
-│ └── script.js # Lógica JS
-├── favicon.ico
+│   └── index.css         # Estilos principales
+├── /scripts/
+│   ├── index.js          # Lógica principal
+│   └── validate.js       # Validación modular
 ├── index.html
+├── favicon.ico
 └── README.md
+```
 
-🛠️ Tecnologías Utilizadas
+---
 
-HTML5 – estructura semántica del sitio
+🛠️ Tecnologías utilizadas
 
-CSS3 – diseño visual, BEM y responsive
+HTML5
 
-JavaScript – manejo de:
+- Estructura semántica
+- Formularios accesibles
 
-popups
+CSS3
 
-edición de perfil
+- Metodología BEM
+- Responsive design
+- Flexbox & Grid
+- Estados visuales (hover, focus, error)
 
-likes
+JavaScript (Vanilla)
 
-eliminación de tarjetas
-
-interacción con DOM
+- Manipulación del DOM
+- Event listeners
+- Creación dinámica de elementos
+- Validación modular
+- Manejo de popups
+- UX interactiva
