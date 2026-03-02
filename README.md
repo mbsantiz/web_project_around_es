@@ -1,247 +1,245 @@
-Tripleten web_project_around
-
+Tripleten — web_project_around
 Around the U.S
 
 Autor: Marcos Santiz
-Enlace: [https://mbsantiz.github.io/web_project_around/](https://mbsantiz.github.io/web_project_around/)
+Enlace: https://mbsantiz.github.io/web_project_around/
 
-Proyecto 9 del BootCamp Software Developer
-
----
+Proyecto 10 del Bootcamp Software Developer
 
 📝 Descripción del Proyecto
 
 Este proyecto es una aplicación web interactiva que simula una red de tarjetas de destinos turísticos con edición de perfil, validación de formularios y múltiples ventanas emergentes (popups).
 
-La aplicación permite al usuario interactuar con tarjetas, editar su perfil y agregar nuevos lugares utilizando formularios con validación en tiempo real.
+En esta versión (Proyecto 10) se realizó una refactorización completa del código JavaScript aplicando Programación Orientada a Objetos (POO) y modularización por responsabilidades.
 
----
+La aplicación permite:
+
+Editar información del perfil.
+
+Agregar nuevas tarjetas dinámicamente.
+
+Dar “like” a tarjetas.
+
+Eliminar tarjetas.
+
+Visualizar imágenes ampliadas.
+
+Validar formularios en tiempo real.
 
 ✨ Características principales
-
 👤 Edición de perfil
 
 Los usuarios pueden modificar su nombre y descripción mediante un popup editable.
 
 Funciones:
 
-- Apertura y cierre de popup
-- Validación de campos en tiempo real
-- Actualización inmediata del perfil en pantalla
-- Botón guardar activo solo cuando el formulario es válido
+Apertura y cierre de popup
 
----
+Validación en tiempo real
+
+Actualización inmediata del contenido del perfil
+
+Botón guardar activo únicamente cuando el formulario es válido
+
+Reset automático del estado de validación al abrir el popup
 
 ➕ Agregar nuevos lugares
 
-Se implementó un formulario para agregar nuevas tarjetas.
+Se implementó un formulario para agregar nuevas tarjetas dinámicamente.
 
 Características:
 
-- Crear nuevas cards dinámicamente
-- Mostrar imagen y título
-- Reset automático del formulario al abrir
-- Validación activa antes de permitir guardar
+Creación de cards a partir de un <template>
 
----
+Inserción dinámica en el DOM
+
+Validación activa antes de permitir guardar
+
+Limpieza automática del formulario al abrir
 
 ❤️ Botón de “Me gusta”
 
-Cada tarjeta incluye un botón de like interactivo.
+Cada tarjeta incluye un botón interactivo de like.
 
 Funciones:
 
-- Alterna entre like y unlike
-- Cambia visualmente el ícono del corazón
-- Funciona de forma independiente por tarjeta
+Alterna entre estado activo e inactivo
 
----
+Cambia dinámicamente el ícono del corazón
+
+Funciona de manera independiente en cada tarjeta
 
 🗑️ Eliminación de tarjetas
 
-Cada card incluye botón de eliminar.
+Cada tarjeta incluye un botón para eliminarla.
 
 Características:
 
-- Ubicado en la esquina superior derecha
-- Posicionado con `position: absolute`
-- Elimina la tarjeta directamente del DOM
+Posicionado con position: absolute
 
----
+Eliminación directa del elemento del DOM
+
+Manejo independiente por instancia de tarjeta
 
 🖼️ Vista ampliada de imágenes
 
-Al hacer clic en cualquier imagen:
+Al hacer clic en una imagen:
 
-- Se abre popup con imagen ampliada
-- Se muestra título como descripción
-- Popup se puede cerrar de múltiples formas
+Se abre un popup con la imagen ampliada
 
----
+Se muestra el título como descripción
 
-🧠 Validación de formularios
+Se puede cerrar mediante botón, overlay o tecla ESC
 
-Se implementó sistema de validación modular en `validate.js`.
+🧠 Arquitectura Orientada a Objetos
+
+En este proyecto se reorganizó completamente la lógica JavaScript utilizando clases y separación de responsabilidades.
+
+📦 Clase Card
+
+Responsable de:
+
+Generar la estructura de una tarjeta desde un template
+
+Asignar datos dinámicamente (imagen y título)
+
+Manejar eventos internos (like, delete, click en imagen)
+
+Ejecutar una función callback para abrir el popup de imagen
+
+Principios aplicados:
+
+Encapsulamiento
+
+Responsabilidad única
+
+Inversión de control (uso de callback)
+
+📦 Clase FormValidator
+
+Responsable de:
+
+Validar campos en tiempo real
+
+Mostrar y ocultar mensajes de error
+
+Activar y desactivar el botón submit
+
+Resetear el estado del formulario
+
+Cada formulario tiene su propia instancia de FormValidator.
+
+Principios aplicados:
+
+Modularización
+
+Encapsulamiento de lógica interna
+
+Reutilización mediante configuración externa
+
+📦 Archivo utils.js
+
+Contiene funciones auxiliares reutilizables:
+
+openPopup()
+
+closePopup()
+
+Permite desacoplar la lógica de los popups del archivo principal.
+
+🔄 Sistema de Validación
+
+La validación ahora está implementada como clase modular:
 
 Incluye:
 
-- Validación en tiempo real
-- Mensajes de error dinámicos
-- Desactivación automática del botón guardar
-- Estilos visuales de error
-- Botón inactivo si el formulario es inválido
+Validación en tiempo real usando la API nativa de HTML5
 
----
+Mensajes de error dinámicos
 
-🔄 Reset de validación al abrir popup
+Desactivación automática del botón si hay campos inválidos
 
-Cada vez que se abre un popup:
-
-- Se limpian errores anteriores
-- Se reinicia estado del botón guardar
-- Inputs vuelven a estado inicial
-
-Esto mejora la experiencia del usuario y evita errores persistentes.
-
----
+Reset de validación al reabrir el popup
 
 ❌ Cierre inteligente de popups
 
-Todos los popups se pueden cerrar con:
+Todos los popups pueden cerrarse mediante:
 
-- Botón "X"
-- Click fuera del formulario (overlay)
-- Tecla **ESC**
+Botón "X"
 
-Funciona para:
+Click en overlay
 
-- Edit profile
-- New place
-- Image preview
+Tecla ESC
 
----
+El manejo es reutilizable y desacoplado.
 
-🎨 Mejoras visuales UI/UX
+🎨 Mejoras UI/UX
 
-Se agregaron mejoras de diseño:
+Uso de metodología BEM
 
-- Inputs con padding superior e inferior
-- Línea decorativa debajo de inputs
-- Color azul al hacer focus en inputs
-- Mensajes de error sin mover el botón guardar
-- Mejor alineación visual de formularios
+Inputs con estados visuales claros
 
----
+Estilos de error sin afectar el layout
 
-🧩 Cambios técnicos clave implementados
+Botones desactivados visualmente cuando el formulario es inválido
 
-✔️ Sistema modular de validación
+Responsive design con Grid y Flexbox
 
-Archivo:
+🧩 Cambios técnicos clave (Proyecto 10)
 
-```
-validate.js
-```
-
-Funciones:
-
-- enableValidation()
-- resetValidation()
-- showInputError()
-- hideInputError()
-- toggleButtonState()
-
-Permite reutilizar validación en cualquier formulario.
-
----
-
-✔️ Manejo global de popups
-
-Funciones reutilizables:
-
-```
-openPopup()
-closePopup()
-```
-
-Eventos globales:
-
-- Escape para cerrar popup activo
-- Click overlay para cerrar
-- Reset de validación al abrir
-
----
-
-✔️ Creación dinámica de tarjetas
-
-Las tarjetas se generan con JavaScript.
-
-Funciones:
-
-- createCard()
-- Inserción dinámica en el DOM
-- Listeners independientes por tarjeta
-
----
-
-✔️ Justificación de position: relative
-
-El contenedor:
-
-```
-.elements__image-container
-```
-
-usa:
-
-```
-position: relative
-```
-
-Permite posicionar:
-
-- Botón eliminar (absolute)
-- Botón like
-- Elementos overlay dentro de la card
-
----
+✔️ Refactorización completa a clases
+✔️ Eliminación de funciones globales
+✔️ Uso de <template> para generación de tarjetas
+✔️ Separación del código en módulos ES6
+✔️ Instancias independientes para cada formulario
+✔️ Uso de callbacks para desacoplar componentes
 
 📁 Estructura del Proyecto
-
-```
-/around-the-us/
-├── /images/              # Imágenes e íconos
+/web_project_around/
+├── /images/
 ├── /pages/
-│   └── index.css         # Estilos principales
+│ └── index.css
 ├── /scripts/
-│   ├── index.js          # Lógica principal
-│   └── validate.js       # Validación modular
+│ ├── Card.js
+│ ├── FormValidator.js
+│ ├── utils.js
+│ └── index.js
 ├── index.html
 ├── favicon.ico
 └── README.md
-```
-
----
-
 🛠️ Tecnologías utilizadas
-
 HTML5
 
-- Estructura semántica
-- Formularios accesibles
+Estructura semántica
+
+Formularios accesibles
+
+Uso de <template>
 
 CSS3
 
-- Metodología BEM
-- Responsive design
-- Flexbox & Grid
-- Estados visuales (hover, focus, error)
+Metodología BEM
 
-JavaScript (Vanilla)
+Responsive design
 
-- Manipulación del DOM
-- Event listeners
-- Creación dinámica de elementos
-- Validación modular
-- Manejo de popups
-- UX interactiva
+Grid & Flexbox
+
+Estados visuales (hover, focus, error)
+
+JavaScript (Vanilla ES6 Modules)
+
+Programación Orientada a Objetos
+
+Manipulación del DOM
+
+Event listeners
+
+Modularización
+
+Callbacks
+
+Encapsulamiento
+
+Validación dinámica
+
+Manejo desacoplado de componentes

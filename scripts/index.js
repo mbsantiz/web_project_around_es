@@ -1,4 +1,6 @@
-import { enableValidation, resetValidation } from "./validate.js";
+import { Card } from "./Card.js";
+import { FormValidator } from "./FormValidator.js";
+import { openPopup, closePopup } from "./utils.js";
 
 const validationConfig = {
   formSelector: ".popup__form",
@@ -9,18 +11,20 @@ const validationConfig = {
   errorClass: "popup__error_visible",
 };
 
-enableValidation(validationConfig);
+const formList = Array.from(
+  document.querySelectorAll(validationConfig.formSelector),
+);
+
+const formValidators = {};
+
+formList.forEach((formElement) => {
+  const validator = new FormValidator(validationConfig, formElement);
+  validator.enableValidation();
+  formValidators[formElement.id] = validator;
+});
 
 document.addEventListener("DOMContentLoaded", () => {
   const elementsSection = document.querySelector(".elements");
-
-  function openPopup(popup) {
-    popup.classList.add("popup_opened");
-  }
-
-  function closePopup(popup) {
-    popup.classList.remove("popup_opened");
-  }
 
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
@@ -65,47 +69,12 @@ document.addEventListener("DOMContentLoaded", () => {
     },
   ];
 
-  function createCard(cardData) {
-    const card = document.createElement("figure");
-    card.classList.add("elements__item");
-
-    card.innerHTML = `
-    <div class="elements__image-container">
-      <img src="${cardData.link}" alt="${cardData.name}" class="elements__image" />
-      <button class="elements__delete-button">
-        <img src="./images/Trash.png" alt="Eliminar" />
-      </button>
-    </div>
-
-    <div class="elements__foot">
-      <p class="elements__foot-text">${cardData.name}</p>
-      <button class="elements__foot-button">
-        <img src="./images/heart.svg" alt="Me gusta" class="elements__button-image" />
-      </button>
-    </div>
-  `;
-
-    const image = card.querySelector(".elements__image");
-    image.addEventListener("click", () => {
-      openImagePopup(cardData.link, cardData.name);
+  function createCard(data) {
+    const card = new Card(data, "#card-template", (link, name) => {
+      openImagePopup(link, name);
     });
 
-    const likeButton = card.querySelector(".elements__foot-button");
-    const likeImg = likeButton.querySelector("img");
-
-    likeButton.addEventListener("click", () => {
-      const isActive = likeButton.classList.toggle("active");
-      likeImg.src = isActive
-        ? "./images/hearthfilled.png"
-        : "./images/heart.svg";
-    });
-
-    const deleteButton = card.querySelector(".elements__delete-button");
-    deleteButton.addEventListener("click", () => {
-      card.remove();
-    });
-
-    return card;
+    return card.generateCard();
   }
 
   initialCards.forEach((cardData) => {
@@ -125,7 +94,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   openProfileBtn?.addEventListener("click", () => {
-    resetValidation(formProfile, validationConfig);
+    formValidators[formProfile.id].resetValidation();
     openPopup(popupProfile);
   });
   closeProfileBtn?.addEventListener("click", () => closePopup(popupProfile));
@@ -162,7 +131,7 @@ document.addEventListener("DOMContentLoaded", () => {
   openPlaceBtn.addEventListener("click", () => {
     openPopup(popupPlace);
     placeForm.reset();
-    resetValidation(placeForm, validationConfig);
+    formValidators[formProfile.id].resetValidation();
   });
 
   closePlaceBtn.addEventListener("click", () => closePopup(popupPlace));
