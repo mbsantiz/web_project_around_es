@@ -1,245 +1,243 @@
-Tripleten — web_project_around
-Around the U.S
+# Tripleten — web_project_around
 
-Autor: Marcos Santiz
-Enlace: https://mbsantiz.github.io/web_project_around/
+## Around the U.S
 
-Proyecto 10 del Bootcamp Software Developer
+**Autor:** Marcos Santiz  
+**Enlace:** https://mbsantiz.github.io/web_project_around/
 
-📝 Descripción del Proyecto
+Proyecto 11 del Bootcamp Software Developer
+
+---
+
+## 📝 Descripción del Proyecto
 
 Este proyecto es una aplicación web interactiva que simula una red de tarjetas de destinos turísticos con edición de perfil, validación de formularios y múltiples ventanas emergentes (popups).
 
-En esta versión (Proyecto 10) se realizó una refactorización completa del código JavaScript aplicando Programación Orientada a Objetos (POO) y modularización por responsabilidades.
+En esta versión (Proyecto 11) se realizó una segunda refactorización del código JavaScript, profundizando en la Programación Orientada a Objetos mediante la creación de nuevas clases especializadas y el uso de herencia, acoplamiento débil y separación de responsabilidades.
 
 La aplicación permite:
 
-Editar información del perfil.
+- Editar información del perfil.
+- Agregar nuevas tarjetas dinámicamente.
+- Dar "like" a tarjetas.
+- Eliminar tarjetas.
+- Visualizar imágenes ampliadas.
+- Validar formularios en tiempo real.
 
-Agregar nuevas tarjetas dinámicamente.
+---
 
-Dar “like” a tarjetas.
+## ✨ Características principales
 
-Eliminar tarjetas.
-
-Visualizar imágenes ampliadas.
-
-Validar formularios en tiempo real.
-
-✨ Características principales
-👤 Edición de perfil
+### 👤 Edición de perfil
 
 Los usuarios pueden modificar su nombre y descripción mediante un popup editable.
 
-Funciones:
+- Apertura y cierre de popup
+- Validación en tiempo real
+- Actualización inmediata del contenido del perfil
+- Botón guardar activo únicamente cuando el formulario es válido
+- Reset automático del estado de validación al abrir el popup
+- Pre-llenado del formulario con los datos actuales del perfil
 
-Apertura y cierre de popup
-
-Validación en tiempo real
-
-Actualización inmediata del contenido del perfil
-
-Botón guardar activo únicamente cuando el formulario es válido
-
-Reset automático del estado de validación al abrir el popup
-
-➕ Agregar nuevos lugares
+### ➕ Agregar nuevos lugares
 
 Se implementó un formulario para agregar nuevas tarjetas dinámicamente.
 
-Características:
+- Creación de cards a partir de un `<template>`
+- Inserción dinámica al inicio de la lista
+- Validación activa antes de permitir guardar
+- Limpieza automática del formulario al cerrar
 
-Creación de cards a partir de un <template>
-
-Inserción dinámica en el DOM
-
-Validación activa antes de permitir guardar
-
-Limpieza automática del formulario al abrir
-
-❤️ Botón de “Me gusta”
+### ❤️ Botón de "Me gusta"
 
 Cada tarjeta incluye un botón interactivo de like.
 
-Funciones:
+- Alterna entre estado activo e inactivo
+- Cambia dinámicamente el ícono del corazón
+- Funciona de manera independiente en cada tarjeta
 
-Alterna entre estado activo e inactivo
-
-Cambia dinámicamente el ícono del corazón
-
-Funciona de manera independiente en cada tarjeta
-
-🗑️ Eliminación de tarjetas
+### 🗑️ Eliminación de tarjetas
 
 Cada tarjeta incluye un botón para eliminarla.
 
-Características:
+- Posicionado con `position: absolute`
+- Eliminación directa del elemento del DOM
+- Manejo independiente por instancia de tarjeta
 
-Posicionado con position: absolute
-
-Eliminación directa del elemento del DOM
-
-Manejo independiente por instancia de tarjeta
-
-🖼️ Vista ampliada de imágenes
+### 🖼️ Vista ampliada de imágenes
 
 Al hacer clic en una imagen:
 
-Se abre un popup con la imagen ampliada
+- Se abre un popup con la imagen ampliada
+- Se muestra el título como descripción
+- Se puede cerrar mediante botón, overlay o tecla ESC
 
-Se muestra el título como descripción
+---
 
-Se puede cerrar mediante botón, overlay o tecla ESC
+## 🧠 Arquitectura Orientada a Objetos
 
-🧠 Arquitectura Orientada a Objetos
+En este proyecto se amplió la arquitectura de clases añadiendo nuevas clases especializadas con herencia y acoplamiento débil.
 
-En este proyecto se reorganizó completamente la lógica JavaScript utilizando clases y separación de responsabilidades.
-
-📦 Clase Card
-
-Responsable de:
-
-Generar la estructura de una tarjeta desde un template
-
-Asignar datos dinámicamente (imagen y título)
-
-Manejar eventos internos (like, delete, click en imagen)
-
-Ejecutar una función callback para abrir el popup de imagen
-
-Principios aplicados:
-
-Encapsulamiento
-
-Responsabilidad única
-
-Inversión de control (uso de callback)
-
-📦 Clase FormValidator
+### 📦 Clase Card
 
 Responsable de:
 
-Validar campos en tiempo real
+- Generar la estructura de una tarjeta desde un template
+- Asignar datos dinámicamente (imagen y título)
+- Manejar eventos internos (like, delete, click en imagen)
+- Ejecutar un callback para abrir el popup de imagen
 
-Mostrar y ocultar mensajes de error
+### 📦 Clase Section
 
-Activar y desactivar el botón submit
+Responsable de:
 
-Resetear el estado del formulario
+- Recibir un array de datos y una función `renderer`
+- Renderizar todos los elementos iniciales en la página con `renderItems()`
+- Insertar elementos individuales en el contenedor con `addItem()`
+- No contiene marcado propio — recibe los elementos ya construidos
 
-Cada formulario tiene su propia instancia de FormValidator.
+### 📦 Clase Popup
+
+Responsable de:
+
+- Abrir y cerrar cualquier popup mediante `open()` y `close()`
+- Manejar el cierre con la tecla Escape mediante `_handleEscClose()`
+- Configurar los event listeners base con `setEventListeners()`
 
 Principios aplicados:
 
-Modularización
+- Clase base reutilizable mediante herencia
+- Encapsulamiento de lógica de apertura/cierre
 
-Encapsulamiento de lógica interna
+### 📦 Clase PopupWithImage _(extiende Popup)_
 
-Reutilización mediante configuración externa
+Responsable de:
 
-📦 Archivo utils.js
+- Mostrar una imagen ampliada con su leyenda en el popup
+- Sobreescribir `open(link, name)` para asignar imagen y caption antes de abrir
 
-Contiene funciones auxiliares reutilizables:
+### 📦 Clase PopupWithForm _(extiende Popup)_
 
-openPopup()
+Responsable de:
 
-closePopup()
+- Manejar el submit de formularios mediante un callback
+- Recopilar los valores de todos los inputs con `_getInputValues()`
+- Resetear el formulario automáticamente al cerrar el popup
+- Sobreescribir `setEventListeners()` para agregar el listener de submit
+- Sobreescribir `close()` para limpiar el formulario
 
-Permite desacoplar la lógica de los popups del archivo principal.
+### 📦 Clase UserInfo
 
-🔄 Sistema de Validación
+Responsable de:
 
-La validación ahora está implementada como clase modular:
+- Almacenar referencias a los elementos del perfil en el DOM
+- Leer los datos actuales del perfil con `getUserInfo()`
+- Actualizar el nombre y trabajo en pantalla con `setUserInfo()`
 
-Incluye:
+### 📦 Clase FormValidator
 
-Validación en tiempo real usando la API nativa de HTML5
+Responsable de:
 
-Mensajes de error dinámicos
+- Validar campos en tiempo real
+- Mostrar y ocultar mensajes de error
+- Activar y desactivar el botón submit
+- Resetear el estado del formulario
 
-Desactivación automática del botón si hay campos inválidos
+---
 
-Reset de validación al reabrir el popup
+## 🔄 Sistema de Validación
 
-❌ Cierre inteligente de popups
+La validación está implementada como clase modular con instancias independientes por formulario:
+
+- Validación en tiempo real usando la API nativa de HTML5
+- Mensajes de error dinámicos
+- Desactivación automática del botón si hay campos inválidos
+- Reset de validación al reabrir el popup
+
+---
+
+## ❌ Cierre inteligente de popups
 
 Todos los popups pueden cerrarse mediante:
 
-Botón "X"
+- Botón "X"
+- Click en el área de overlay
+- Tecla ESC
 
-Click en overlay
+El manejo está encapsulado en la clase `Popup` y heredado por todas las clases hijas.
 
-Tecla ESC
+---
 
-El manejo es reutilizable y desacoplado.
+## 🎨 Mejoras UI/UX
 
-🎨 Mejoras UI/UX
+- Uso de metodología BEM
+- Inputs con estados visuales claros
+- Estilos de error sin afectar el layout
+- Botones desactivados visualmente cuando el formulario es inválido
+- Responsive design con Grid y Flexbox
 
-Uso de metodología BEM
+---
 
-Inputs con estados visuales claros
+## 🧩 Cambios técnicos clave (Proyecto 11)
 
-Estilos de error sin afectar el layout
+- ✔️ Creación de la clase `Section` para renderizar listas de elementos
+- ✔️ Creación de la clase base `Popup` con lógica de apertura/cierre
+- ✔️ Creación de `PopupWithImage` como clase hija de `Popup`
+- ✔️ Creación de `PopupWithForm` como clase hija de `Popup`
+- ✔️ Creación de la clase `UserInfo` para manejo del perfil
+- ✔️ Uso de herencia con `extends` y `super`
+- ✔️ Acoplamiento débil entre clases mediante callbacks
+- ✔️ `index.js` reducido a solo instancias y event listeners
+- ✔️ Eliminación de funciones globales y lógica dispersa
 
-Botones desactivados visualmente cuando el formulario es inválido
+---
 
-Responsive design con Grid y Flexbox
+## 📁 Estructura del Proyecto
 
-🧩 Cambios técnicos clave (Proyecto 10)
-
-✔️ Refactorización completa a clases
-✔️ Eliminación de funciones globales
-✔️ Uso de <template> para generación de tarjetas
-✔️ Separación del código en módulos ES6
-✔️ Instancias independientes para cada formulario
-✔️ Uso de callbacks para desacoplar componentes
-
-📁 Estructura del Proyecto
+```
 /web_project_around/
 ├── /images/
 ├── /pages/
-│ └── index.css
+│   └── index.css
 ├── /scripts/
-│ ├── Card.js
-│ ├── FormValidator.js
-│ ├── utils.js
-│ └── index.js
+│   ├── Card.js
+│   ├── FormValidator.js
+│   ├── Section.js
+│   ├── Popup.js
+│   ├── PopupWithImage.js
+│   ├── PopupWithForm.js
+│   ├── UserInfo.js
+│   ├── utils.js
+│   └── index.js
 ├── index.html
 ├── favicon.ico
 └── README.md
-🛠️ Tecnologías utilizadas
-HTML5
+```
 
-Estructura semántica
+---
 
-Formularios accesibles
+## 🛠️ Tecnologías utilizadas
 
-Uso de <template>
+**HTML5**
 
-CSS3
+- Estructura semántica
+- Formularios accesibles
+- Uso de `<template>`
 
-Metodología BEM
+**CSS3**
 
-Responsive design
+- Metodología BEM
+- Responsive design
+- Grid & Flexbox
+- Estados visuales (hover, focus, error, disabled)
 
-Grid & Flexbox
+**JavaScript (Vanilla ES6 Modules)**
 
-Estados visuales (hover, focus, error)
-
-JavaScript (Vanilla ES6 Modules)
-
-Programación Orientada a Objetos
-
-Manipulación del DOM
-
-Event listeners
-
-Modularización
-
-Callbacks
-
-Encapsulamiento
-
-Validación dinámica
-
-Manejo desacoplado de componentes
+- Programación Orientada a Objetos
+- Herencia de clases (`extends`, `super`)
+- Manipulación del DOM
+- Event listeners
+- Modularización
+- Callbacks y acoplamiento débil
+- Encapsulamiento
+- Validación dinámica
