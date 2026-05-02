@@ -2,7 +2,7 @@ import { Card } from "./Card.js";
 import { FormValidator } from "./FormValidator.js";
 import { Section } from "./Section.js";
 import { PopUpWithImage } from "./PopUpWithImage.js";
-import { PopupWithForm } from "./PopupWithForm.js";
+import { PopupWithForm } from "./PopupWithForms.js";
 import { UserInfo } from "./UserInfo.js";
 import { api } from "./Api.js";
 import { PopupWithConfirmation } from "./PopupWithConfirmation.js";
