@@ -1,11 +1,11 @@
-import { Card } from "./Card.js";
-import { FormValidator } from "./FormValidator.js";
-import { Section } from "./Section.js";
-import { PopUpWithImage } from "./PopUpWithImage.js";
-import { PopupWithForm } from "./PopupWithForms.js";
-import { UserInfo } from "./UserInfo.js";
-import { api } from "./Api.js";
-import { PopupWithConfirmation } from "./PopupWithConfirmation.js";
+import { Card } from "../components/Card.js";
+import { FormValidator } from "../components/FormValidator.js";
+import { Section } from "../components/Section.js";
+import { PopUpWithImage } from "../components/PopUpWithImage.js";
+import { PopupWithForm } from "../components/PopupWithForms.js";
+import { UserInfo } from "../components/UserInfo.js";
+import { api } from "../components/Api.js";
+import { PopupWithConfirmation } from "../components/PopupWithConfirmation.js";
 
 const userInfo = new UserInfo({
   nameSelector: ".cover__container__info-name",
