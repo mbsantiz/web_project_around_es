@@ -175,24 +175,47 @@ Foto de perfil actualizable desde un enlace
 
 📁 Estructura del Proyecto
 /web_project_around/
-├── /images/
-├── /pages/
-│ └── index.css
-├── /scripts/
+├── .editorconfig
+├── .gitignore
+├── .prettierignore
+├── favicon.ico
+├── README.md
+└── src/
+├── index.html
+├── blocks/
+│ ├── cover.css
+│ ├── elements.css
+│ ├── footer.css
+│ ├── form.css
+│ ├── header.css
+│ ├── media.css
+│ ├── page.css
+│ └── popupimage.css
+├── components/
 │ ├── Api.js
 │ ├── Card.js
 │ ├── FormValidator.js
-│ ├── Section.js
 │ ├── Popup.js
-│ ├── PopupWithImage.js
-│ ├── PopupWithForm.js
 │ ├── PopupWithConfirmation.js
+│ ├── PopupWithForms.js
+│ ├── PopUpWithImage.js
+│ ├── Section.js
 │ ├── UserInfo.js
+│ ├── utils.js
+│ └── validate.js
+├── images/
+│ └── (todas las imágenes)
+├── page/
+│ ├── index.css
 │ └── index.js
-├── index.html
-├── favicon.ico
-└── README.md
-
+└── vendor/
+├── fonts.css
+├── normalize.css
+└── fonts/
+├── Inter-Black.woff2
+├── Inter-Regular.woff2
+├── Inter-SemiBold.woff2
+└── inter.css
 🛠️ Tecnologías utilizadas
 HTML5
 
