@@ -26,7 +26,7 @@ export class Card {
         .dislikeCard(this._id)
         .then(() => {
           this._likeButton.classList.remove("active");
-          this._likeImage.src = "./images/heart.svg";
+          this._likeImage.src = "../images/heart.svg";
         })
         .catch((err) => {
           console.log(err);
@@ -36,7 +36,7 @@ export class Card {
         .likeCard(this._id)
         .then(() => {
           this._likeButton.classList.add("active");
-          this._likeImage.src = "./images/hearthfilled.png";
+          this._likeImage.src = "../images/hearthfilled.png";
         })
         .catch((err) => {
           console.log(err);
