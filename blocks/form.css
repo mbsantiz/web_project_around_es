@@ -40,6 +40,19 @@
   letter-spacing: 0%;
 }
 
+.popup__title-delete {
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 36px;
+  margin-bottom: 0;
+  padding-top: 14px;
+  padding-bottom: 25px;
+  font-family: Inter;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 0%;
+}
 .popup__form {
   margin-top: 35px;
 }
@@ -145,4 +158,10 @@
   color: #c4c4c4;
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+#popupAvatar .popup__container,
+#popupConfirm .popup__container {
+  min-height: auto;
+  padding-bottom: 36px;
 }

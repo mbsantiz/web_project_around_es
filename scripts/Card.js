@@ -1,9 +1,13 @@
+import { api } from "./Api.js";
+
 export class Card {
-  constructor(data, templateSelector, handleCardClick) {
+  constructor(data, templateSelector, handleCardClick, handleDelete) {
     this._name = data.name;
     this._link = data.link;
+    this._id = data._id;
     this._templateSelector = templateSelector;
     this._handleCardClick = handleCardClick;
+    this._handleDelete = handleDelete;
   }
 
   _getTemplate() {
@@ -16,23 +20,35 @@ export class Card {
   }
 
   _handleLikeClick() {
-    this._likeButton.classList.toggle("active");
     const isActive = this._likeButton.classList.contains("active");
-    this._likeImage.src = isActive
-      ? "./images/hearthfilled.png"
-      : "./images/heart.svg";
-  }
-
-  _handleDeleteClick() {
-    this._element.remove();
-    this._element = null;
+    if (isActive) {
+      api
+        .dislikeCard(this._id)
+        .then(() => {
+          this._likeButton.classList.remove("active");
+          this._likeImage.src = "./images/heart.svg";
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      api
+        .likeCard(this._id)
+        .then(() => {
+          this._likeButton.classList.add("active");
+          this._likeImage.src = "./images/hearthfilled.png";
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   }
 
   _setEventListeners() {
     this._likeButton.addEventListener("click", () => this._handleLikeClick());
 
     this._deleteButton.addEventListener("click", () =>
-      this._handleDeleteClick(),
+      this._handleDelete(this),
     );
 
     this._image.addEventListener("click", () =>

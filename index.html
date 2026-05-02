@@ -30,11 +30,20 @@
 
       <section class="cover">
         <div class="cover__container">
-          <img
-            src="./images/image.jpg"
-            alt="Foto de perfil"
-            class="cover__container-image"
-          />
+          <div class="cover__avatar">
+            <img
+              src="./images/image.jpg"
+              alt="Foto de perfil"
+              class="cover__container-image"
+            />
+
+            <img
+              src="./images/pencil.png"
+              alt="Editar avatar"
+              class="cover__avatar-edit"
+            />
+          </div>
+
           <div class="cover__text">
             <div class="cover__info">
               <h2 class="cover__name cover__container__info-name">
@@ -107,6 +116,51 @@
             <span class="popup__error" id="about-error"></span>
 
             <button id="saveButton" type="submit" class="popup__savebutton">
+              Guardar
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div id="popupConfirm" class="popup">
+        <div class="popup__container">
+          <img
+            src="./images/Close Icon (3).png"
+            alt="Cerrar"
+            class="popup__close"
+            id="closePopupConfirm"
+          />
+          <h2 class="popup__title-delete">¿Estás seguro?</h2>
+          <button id="confirmButton" type="button" class="popup__savebutton">
+            Si
+          </button>
+        </div>
+      </div>
+
+      <div id="popupAvatar" class="popup">
+        <div class="popup__container">
+          <img
+            src="./images/Close Icon (3).png"
+            alt="Cerrar"
+            class="popup__close"
+            id="closePopupAvatar"
+          />
+          <h2 class="popup__title">Cambiar foto de perfil</h2>
+          <form class="popup__form" id="editAvatar">
+            <input
+              type="url"
+              class="popup__input popup__input-text popup__form__text"
+              placeholder="Imagen"
+              id="Avatar"
+              name="avatar"
+              required
+              minlength="2"
+            />
+
+            <span class="popup__line"></span>
+            <span class="popup__error" id="avatar-error"></span>
+
+            <button id="saveAvatar" type="submit" class="popup__savebutton">
               Guardar
             </button>
           </form>

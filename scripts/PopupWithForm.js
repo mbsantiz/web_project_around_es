@@ -24,6 +24,11 @@ export class PopupWithForm extends Popup {
     });
   }
 
+  editButton(text) {
+    const button = this._form.querySelector(".popup__savebutton");
+    button.textContent = text;
+  }
+
   close() {
     super.close();
     this._form.reset();
